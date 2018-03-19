@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.ngumeniuk.curogram.NoteList.NotesListActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <include layout="@layout/item_note_list_view"/>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addButton"

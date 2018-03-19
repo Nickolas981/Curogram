@@ -8,5 +8,5 @@ data class NoteModel(
         @PrimaryKey val id : Int,
         val title: String,
         val text: String,
-        val date: Long
+        val date: String
 )

@@ -2,10 +2,11 @@ package com.example.ngumeniuk.curogram.widgets
 
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
+import com.example.ngumeniuk.curogram.utils.Differeble
 import com.example.ngumeniuk.curogram.utils.NoteDiffUtilCallback
 
 
-abstract class ListAdapter<T, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>() {
+abstract class ListAdapter<T : Differeble, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>() {
 
     val list: MutableList<T> = ArrayList()
 

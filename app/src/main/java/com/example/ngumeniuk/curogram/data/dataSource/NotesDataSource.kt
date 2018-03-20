@@ -15,7 +15,7 @@ interface NotesDataSource {
 
     fun updateNote(note: NoteModel)
 
-    fun dropTable()
+    fun deleteById(id: Int)
 
     fun putNote(note: NoteModel)
 }

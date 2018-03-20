@@ -13,5 +13,5 @@ class NotesRepository : NotesDataSource {
     override fun delete(note: NoteModel) = notesDao.delete(note)
     override fun putNote(note: NoteModel) = notesDao.putNote(note)
     override fun updateNote(note: NoteModel) = notesDao.updateNote(note)
-    override fun dropTable() = notesDao.dropTable()
+    override fun deleteById(id: Int) = notesDao.deleteById(id)
 }

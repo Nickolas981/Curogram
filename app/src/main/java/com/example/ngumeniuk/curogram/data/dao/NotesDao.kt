@@ -23,6 +23,6 @@ interface NotesDao {
     @Update
     fun updateNote(note: NoteModel)
 
-    @Query("DELETE FROM notes")
-    fun dropTable()
+    @Query("DELETE FROM notes WHERE id LIKE :id")
+    fun deleteById(id: Int)
 }

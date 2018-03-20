@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="com.example.ngumeniuk.curogram.addEditNote.AddEditActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/closeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_close_black_24dp" />
+    </Toolbar>
+
+    <EditText
+        android:id="@+id/titleET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:fontFamily="@font/roboto_mono"
+        android:hint="@string/title_hint"
+        android:padding="16dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/textET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:fontFamily="@font/roboto_mono"
+        android:hint="@string/text_hint"
+        android:padding="16dp"
+        android:textSize="14sp" />
+</LinearLayout>

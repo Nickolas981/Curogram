@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Curogram</string>
+    <string name="title_hint">Title</string>
+    <string name="text_hint">Text</string>
 </resources>

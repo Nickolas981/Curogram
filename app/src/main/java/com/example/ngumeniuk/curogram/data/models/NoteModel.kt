@@ -5,8 +5,10 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "notes")
 data class NoteModel(
-        @PrimaryKey val id : Int,
-        val title: String,
-        val text: String,
-        val date: String
-)
+        var title: String,
+        var text: String,
+        var date: Long
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null
+}

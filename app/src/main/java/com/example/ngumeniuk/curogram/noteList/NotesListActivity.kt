@@ -84,7 +84,8 @@ class NotesListActivity : AppCompatActivity() {
         })
 
         notesViewModule.getLoadingLiveData().observe(this, Observer { loading ->
-            loadingView.visibility = if (loading!!) View.VISIBLE else View.INVISIBLE
+            loadingView.visibility = if (loading!!) View.VISIBLE else View.GONE
+            if (loading) addButton.hide() else addButton.show()
         })
 
         notesViewModule.getErrorLiveData().observe(this, Observer { error ->

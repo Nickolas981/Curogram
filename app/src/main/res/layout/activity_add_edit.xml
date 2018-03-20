@@ -2,20 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.ngumeniuk.curogram.addEditNote.AddEditActivity">
 
-    <Toolbar
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        android:paddingStart="16dp">
 
         <ImageView
             android:id="@+id/closeButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/ic_close_black_24dp" />
-    </Toolbar>
+    </FrameLayout>
 
     <EditText
         android:id="@+id/titleET"

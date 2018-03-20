@@ -2,19 +2,18 @@ package com.example.ngumeniuk.curogram.noteList
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
 import com.example.ngumeniuk.curogram.data.dataRepositories.NotesRepository
 import com.example.ngumeniuk.curogram.data.models.NoteModel
+import com.example.ngumeniuk.curogram.utils.BaseViewModel
+import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.delay
 import org.jetbrains.anko.coroutines.experimental.bg
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 
-class NotesViewModule : ViewModel() {
+class NotesViewModule : BaseViewModel() {
 
     private val dataRep by lazy { NotesRepository() }
 
@@ -45,10 +44,10 @@ class NotesViewModule : ViewModel() {
     }
 
     private fun getAllNotes() {
-        dataRep.getAll()
+        addDisposable(dataRep.getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::setLiveData)
+                .subscribe(this::setLiveData))
     }
 
     private fun startLoading() = liveDataLoading.postValue(true)
@@ -61,17 +60,20 @@ class NotesViewModule : ViewModel() {
             liveDataList.postValue(data)
 
 
-    private fun delayFor(func: () -> Unit, time: Long = 2000) {
-        async(UI) {
-            startLoading()
-            delay(time)
-            if (++savingCount == 3) {
-                showError()
-                savingCount = 0
-            } else
-                func()
-            stopLoading()
-        }
+    private fun delayFor(func: () -> Unit) {
+        addDisposable(Completable.complete()
+                .delay(2, TimeUnit.SECONDS)
+                .doOnSubscribe { startLoading() }
+                .doOnComplete {
+                    if (++savingCount == 3) {
+                        savingCount = 0
+                        showError()
+                    } else
+                        func()
+                    stopLoading()
+                    println(Thread.currentThread().name)
+                }
+                .subscribe())
     }
 
     fun getNotesLiveData(): LiveData<List<NoteModel>> =
@@ -87,13 +89,14 @@ class NotesViewModule : ViewModel() {
             bg { dataRep.delete(model) }
 
     private fun putNote(noteModel: NoteModel) =
-            bg { dataRep.putNote(noteModel) }
+            dataRep.putNote(noteModel)
 
     private fun update(noteModel: NoteModel) =
-            bg { dataRep.updateNote(noteModel) }
+            dataRep.updateNote(noteModel)
 
     private fun deleteById(id: Int) =
             bg { dataRep.deleteById(id) }
+
 
     fun putDummy() {
         bg {

@@ -14,24 +14,11 @@ abstract class ListAdapter<T : Differeble, VH : RecyclerView.ViewHolder> : Recyc
 
     override fun getItemId(i: Int): Long = i.toLong()
 
-    fun change(vararg items: T) =
-            change(items.toList())
-
-
     fun change(items: List<T>) {
         val diff = DiffUtil.calculateDiff(NoteDiffUtilCallback(list, items.toList()))
-        clearList(false)
+        clearList()
         list.addAll(items)
         diff.dispatchUpdatesTo(this)
-    }
-
-    fun add(vararg items: T) =
-            add(items.toList())
-
-
-    fun add(items: List<T>) {
-        list.addAll(items)
-        notifyDataSetChanged()
     }
 
     fun removeAt(position: Int) {
@@ -39,8 +26,7 @@ abstract class ListAdapter<T : Differeble, VH : RecyclerView.ViewHolder> : Recyc
         notifyItemRemoved(position)
     }
 
-    fun clearList(notify: Boolean = true) {
+    private fun clearList() {
         list.clear()
-        if (notify) notifyDataSetChanged()
     }
 }

@@ -10,9 +10,9 @@ import java.util.*
 class DateUtil {
     companion object {
         @SuppressLint("SimpleDateFormat")
-        fun formatedDate(): String =
+        fun formatedDate(time: Long): String =
                 SimpleDateFormat("yyyy/MM/dd/kk:mm:ss")
-                        .format(Calendar.getInstance().time)
+                        .format(Date(time))
 
     }
 }

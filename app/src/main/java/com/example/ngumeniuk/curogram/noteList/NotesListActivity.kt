@@ -96,7 +96,10 @@ class NotesListActivity : AppCompatActivity() {
         notesViewModule.getErrorLiveData().observe(this, Observer { error ->
             if (error!!) {
                 alert("This is not me. Eugene asked to make this Error.", "Uppps...Error") {
-                    okButton { toast("Really sorry...Try again") }
+                    okButton {
+                        toast("Really sorry...Try again")
+                        notesViewModule.hideError()
+                    }
                 }.show()
             }
         })

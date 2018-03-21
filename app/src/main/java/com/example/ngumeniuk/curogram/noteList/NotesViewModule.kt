@@ -97,6 +97,9 @@ class NotesViewModule : BaseViewModel() {
     private fun deleteById(id: Int) =
             bg { dataRep.deleteById(id) }
 
+    fun hideError() {
+        liveDataError.postValue(false)
+    }
 
     fun putDummy() {
         bg {
